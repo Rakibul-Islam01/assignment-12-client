@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaGoogle } from 'react-icons/fa';
 
 const Registration = () => {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, signInWithGoogle } = useContext(AuthContext);
 
 
     const handleRegister = event => {
@@ -66,6 +67,20 @@ const Registration = () => {
 
     }
 
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result.user)
+                // saveUser(result.user)
+                // navigate(from, { replace: true })
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err.message)
+                toast.error(err.message)
+            })
+    }
+
 
 
     return (
@@ -107,9 +122,16 @@ const Registration = () => {
                     /><br /><br />
                     <input className='border login-btn bg-[#00cecb] hover:bg-[#0d807e] transition  text-white py-2 px-4 text-xl rounded mt-5 cursor-pointer' type="submit" value="Register" />
                 </div>
+                <div
+                    onClick={handleGoogleSignIn}
+                    className='flex justify-center items-center space-x-2 border m-3 p-2 w-3/4 mx-auto mt-6 border-gray-300 border-rounded hover:bg-[#0ca09d] transition cursor-pointer'
+                >
+                    <FaGoogle size={32} />
 
+                    <p>Continue with Google</p>
+                </div>
                 {/* <p className='text-green-700 text-center'>{success}</p> */}
-                <p className='text-red-700 text-center'>{error}</p>
+                {/* <p className='text-red-700 text-center'>{error}</p> */}
 
                 <p className='text-center mt-3'>Already Registered? Please <Link className='border-2 rounded px-2 py-1 hover:bg-[#e6e6e6]  border-gray' to="/login">Login</Link> here </p>
             </form>

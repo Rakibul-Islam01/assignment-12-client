@@ -69,17 +69,16 @@ const Login = () => {
                     </div>
                     <input className='border login-btn bg-[#00cecb] hover:bg-[#0d807e] transition  text-white py-2 px-4 text-xl rounded mt-5 cursor-pointer' type="submit" value="Login" />
                 </div>
-                {/* <p className='text-green-700 text-center'>{success}</p>
-                <p className='text-red-700 text-center'>{error}</p> */}
+                
                 <div
                     onClick={handleGoogleSignIn}
-                    className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'
+                    className='flex justify-center items-center space-x-2 border m-3 p-2 w-3/4 mx-auto mt-6 border-gray-300 border-rounded hover:bg-[#0ca09d] transition cursor-pointer'
                 >
                     <FaGoogle size={32} />
 
                     <p>Continue with Google</p>
                 </div>
-                <p className='text-center mt-3'>Haven't an account? Please <Link className='border-2 rounded px-2 py-1 hover:bg-[#e6e6e6]  border-gray' to="/register">Register</Link> here </p>
+                <p className='text-center mt-6'>Haven't an account? Please <Link className='border-2 rounded px-2 py-1 hover:bg-[#e6e6e6]  border-gray' to="/register">Register</Link> here </p>
             </form>
             <ToastContainer />
         </div>
