@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css'
 import { FaBeer, FaEye } from 'react-icons/fa';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleTogglePassword = () => {
-        setShowPassword(!showPassword);
-    };
-
+    const {signIn} = useContext(AuthContext)
+   
     const handleLogin = (e) => {
         e.preventDefault();
         // Perform login logic here
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
         console.log('Email:', email);
         console.log('Password:', password);
+
+        signIn(email, password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser)
+            toast("Login Successfull")
+        })
+        .catch(err => {
+            toast('Wrong Password')
+        })
     };
 
     return (
@@ -46,6 +58,7 @@ const Login = () => {
                 <p className='text-red-700 text-center'>{error}</p> */}
                 <p className='text-center mt-3'>Haven't an account? Please <Link className='border-2 rounded px-2 py-1 hover:bg-[#e6e6e6]  border-gray' to="/register">Register</Link> here </p>
             </form>
+            <ToastContainer />
         </div>
     );
 };

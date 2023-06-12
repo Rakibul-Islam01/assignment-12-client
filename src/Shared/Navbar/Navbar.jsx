@@ -1,7 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Navbar = () => {
+
+    const { user, logOut } = useContext(AuthContext)
+    console.log(user)
+
+    const handleLogOut =()=>{
+        logOut()
+        .then(result=>{})
+        .catch(err=>{})
+    }
+
+
     return (
         <div>
             <div className="navbar bg-[#00cecb]">
@@ -20,16 +32,21 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                    <li><Link to="/">Home</Link></li>
-                            <li><Link to="/">Instructors</Link></li>
-                            <li><Link to="/">Classes</Link></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/">Instructors</Link></li>
+                        <li><Link to="/">Classes</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link className='md:mr-2' to="/dashboard">Dashboard</Link>
-                    <button className='btn btn-sm border-none hover:bg-[#13b8b5]'>
-                    <Link to="/login">Login</Link>
-                    </button>
+                    {
+                        user ? <>
+                            <Link className='md:mr-2' to="/dashboard">Dashboard</Link> <button onClick={handleLogOut} className='btn btn-sm mr-2'>LogOut</button> <img className='h-12 w-12 rounded-full cursor-pointer' src={user.photoURL} alt="" height={60} width={60} title={user?.displayName} />
+                        </> : <button className='btn btn-sm border-none hover:bg-[#13b8b5]'>
+                            <Link to="/login">Login</Link>
+                        </button>
+                    }
+
+
                 </div>
             </div>
         </div>
