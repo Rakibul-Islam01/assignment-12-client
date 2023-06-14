@@ -13,8 +13,17 @@ import Registration from './Pages/Registration/Registration.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import DashboardLayout from './Layout/DashboardLayout.jsx';
+import MangeUsers from './Pages/Dashboard/Admin/MangeUsers.jsx';
 
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -38,7 +47,13 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <DashboardLayout></DashboardLayout>
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: 'dashboard/users',
+        element: <MangeUsers></MangeUsers>
+      }
+    ]
   }
 ]);
 
@@ -47,7 +62,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>,
 )
