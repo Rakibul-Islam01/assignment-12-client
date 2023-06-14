@@ -5,9 +5,9 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from 'react-icons/fa';
+import { saveUser } from '../../api/auth';
 
 const Registration = () => {
-    const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
     const { createUser, signInWithGoogle } = useContext(AuthContext);
@@ -32,23 +32,18 @@ const Registration = () => {
             return;
           }
 
-        setError('')
         createUser(email, password)
             .then(result => {
                 const createdUser = result.user;
                 console.log(createdUser)
                 handleUpdateUser(result.user, name, photoUrl)
                 form.reset()
-                setSuccess("User has been created successfully")
+                toast("Registration Successfull")
+                // saveUser(result.user)
             })
             .catch(error => {
-                // console.log(error)
+                toast(error.message)
             })
-
-        // if (password.length < 6 || /[A-Z]/.test(password) || /[!@#$%^&*]/.test(password)) {
-        //     setError('Password should be at least 6 characters')
-        //     return;
-        // }
 
 
        
@@ -59,6 +54,7 @@ const Registration = () => {
             })
                 .then(() => {
                     console.log('user name and photo updated')
+                    saveUser(user)
                 })
                 .catch(error => {
                     console.log(error.message)
@@ -71,7 +67,7 @@ const Registration = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user)
-                // saveUser(result.user)
+                saveUser(result.user)
                 // navigate(from, { replace: true })
             })
             .catch(err => {

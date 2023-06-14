@@ -5,6 +5,7 @@ import { FaBeer, FaEye, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { saveUser } from '../../api/auth';
 
 const Login = () => {
     const { signIn, signInWithGoogle } = useContext(AuthContext)
@@ -23,6 +24,7 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 toast("Login Successfull")
+                saveUser(result.user)
             })
             .catch(err => {
                 toast('Wrong Password')
@@ -34,7 +36,7 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user)
-                // saveUser(result.user)
+                saveUser(result.user)
                 // navigate(from, { replace: true })
             })
             .catch(err => {

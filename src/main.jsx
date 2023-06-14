@@ -12,6 +12,7 @@ import Login from './Pages/Login/Login.jsx';
 import Registration from './Pages/Registration/Registration.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
+import DashboardLayout from './Layout/DashboardLayout.jsx';
 
 
 
@@ -35,7 +36,13 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: 'dashboard',
+    element: <DashboardLayout></DashboardLayout>
+  }
 ]);
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

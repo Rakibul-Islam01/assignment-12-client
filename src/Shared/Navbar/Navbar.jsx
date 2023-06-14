@@ -38,9 +38,10 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                <Link className='md:mr-2' to="/dashboard">Dashboard</Link> 
                     {
                         user ? <>
-                            <Link className='md:mr-2' to="/dashboard">Dashboard</Link> <button onClick={handleLogOut} className='btn btn-sm mr-2'>LogOut</button> <img className='h-12 w-12 rounded-full cursor-pointer' src={user.photoURL} alt="" height={60} width={60} title={user?.displayName} />
+                            <button onClick={handleLogOut} className='btn btn-sm mr-2'>LogOut</button> <img className='h-12 w-12 rounded-full cursor-pointer' src={user.photoURL} alt="" height={60} width={60} title={user?.displayName} />
                         </> : <button className='btn btn-sm border-none hover:bg-[#13b8b5]'>
                             <Link to="/login">Login</Link>
                         </button>
