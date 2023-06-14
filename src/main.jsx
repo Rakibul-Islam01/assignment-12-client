@@ -14,6 +14,8 @@ import AuthProvider from './Provider/AuthProvider.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import DashboardLayout from './Layout/DashboardLayout.jsx';
 import MangeUsers from './Pages/Dashboard/Admin/MangeUsers.jsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   useQuery,

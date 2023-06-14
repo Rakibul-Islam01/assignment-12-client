@@ -1,35 +1,47 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MangeUsers = () => {
+    const [buttonDisabled, setButtonDisabled] = useState(false);
     const { data: users = [], refetch } = useQuery(['users'], async () => {
         const res = await fetch('http://localhost:5000/users')
         return res.json()
     })
 
-    const handleMakeAdmin = user =>{
+    const handleMakeAdmin = user => {
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: "PATCH"
         })
-        .then(res => res.json())
-        .then(data =>{
-            console.log(data)
-            if(data.modifiedCount){
-                refetch()
-                toast(`${user.name} is admin now`)
-            }
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount) {
+                    refetch()
+                    toast(`${user.name} is admin now`)
+                }
+            })
+    }
+
+    const handleMakeInstructor = user => {
+        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+            method: "PATCH"
         })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount) {
+                    refetch()
+                    toast(`${user.name} is instructor now`)
+                }
+            })
     }
 
-    const handleMakeInstructor = user =>{
-
-    }
-
-
+    // TODO: should button disabled after updating role by admin 
 
     return (
-        
+
         <div className='w-full'>
             <h2 className='font-bold text-xl mb-10'>The Total Number Of Users: {users.length}</h2>
             <div className="overflow-x-auto">
@@ -69,8 +81,9 @@ const MangeUsers = () => {
                                 <td>{user.role}</td>
                                 <th>
                                     <div className='flex flex-col gap-2'>
-                                        <button onClick={()=>{handleMakeAdmin(user)}} className="btn btn-ghost bg-slate-200 btn-xs">Make Admin</button>
-                                        <button onClick={()=>{handleMakeInstructor(user)}} className="btn bg-slate-200 btn-ghost btn-xs">Make Instructor</button>
+                                        <button onClick={() => { handleMakeAdmin(user) }} className="btn btn-ghost bg-slate-200 btn-xs">Make Admin</button>
+
+                                        <button onClick={() => { handleMakeInstructor(user) }} className="btn bg-slate-200 btn-ghost btn-xs">Make Instructor</button>
                                     </div>
                                 </th>
                             </tr>)
@@ -79,6 +92,7 @@ const MangeUsers = () => {
 
                 </table>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
