@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
 
 const DashboardLayout = () => {
+    const {user, loading} = useContext(AuthContext)
 
-    const admin = true;
-    const instructor = false;
-    const student = false;
+    const { data: loggeduser = [], refetch } = useQuery(['loggeduser'], async () => {
+        const res = await fetch(`http://localhost:5000/users?email=${user?.email}`)
+        return res.json()
+    })
+
+    if(loading){
+        <span className="loading loading-bars loading-lg"></span>
+    }
+    
+    console.log(loggeduser[0]?.role)
+ 
+    // const admin = true;
+    // const instructor = false;
+    // const student = false;
 
 
 
@@ -25,39 +39,25 @@ const DashboardLayout = () => {
                     <div>
                         <h2 className='text-xl font-bold text-cyan-600 mb-8'>DRAW VERSE</h2>
                     </div>
-                    <li className='text-start ps-4 mb-4 font-bold '>Admin Dashboard</li>
 
 
                     {/* Sidebar content here */}
                     {/* For Admin */}
-                    {admin ? <>
+                    {loggeduser[0]?.role === 'admin' ? <>
+                        <li className='text-start ps-4 mb-4 font-bold '>Admin Dashboard</li>
                         <li><Link >Manage Classes</Link></li>
                         <li><Link to="dashboard/users">Manage Users</Link></li>
-                    </> : instructor ? <>
-                        <li><a>Add A Classes</a></li>
+                    </> : loggeduser[0]?.role === 'instructor' ? <>
+                    <li className='text-start ps-4 mb-4 font-bold '>Instructor Dashboard</li>
+                        <li><Link to="dashboard/add-a-class">Add A Class</Link></li>
                         <li><a>My Classes</a></li>
                         <li><a>Total Enrolled Students</a></li>
                         <li><a>Feedback</a></li>
                     </> : <>
+                    <li className='text-start ps-4 mb-4 font-bold '>Student Dashboard</li>
                         <li><a>My Selected Class</a></li>
                         <li><a>My Enrolled Class</a></li>
                     </>}
-
-
-                    {/* For Instructor */}
-                    {/* {instructor && <>
-                        <li><a>Add A Classes</a></li>
-                        <li><a>My Classes</a></li>
-                        <li><a>Total Enrolled Students</a></li>
-                        <li><a>Feedback</a></li>
-                    </>} */}
-
-
-                    {/* For Student */}
-                    {/* {student && <>
-                        <li><a>My Selected Class</a></li>
-                        <li><a>My Enrolled Class</a></li>
-                    </>} */}
 
 
                     <div className="divider"></div>

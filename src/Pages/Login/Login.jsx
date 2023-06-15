@@ -24,7 +24,7 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 toast("Login Successfull")
-                saveUser(result.user)
+                // saveUser(result.user)
             })
             .catch(err => {
                 toast('Wrong Password')
