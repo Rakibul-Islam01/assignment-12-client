@@ -25,6 +25,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import AddAClass from './Pages/Dashboard/AddAClass/AddAClass.jsx';
+import MyClasses from './Pages/Dashboard/MyClasses/MyClasses.jsx';
 
 const queryClient = new QueryClient()
 
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
       {
         path: 'dashboard/add-a-class',
         element: <AddAClass></AddAClass>
-      }
+      },
+      {
+        path: 'dashboard/my-classes',
+        element: <MyClasses></MyClasses>
+      },
     ]
   }
 ]);

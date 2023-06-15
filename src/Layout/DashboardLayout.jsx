@@ -50,7 +50,7 @@ const DashboardLayout = () => {
                     </> : loggeduser[0]?.role === 'instructor' ? <>
                     <li className='text-start ps-4 mb-4 font-bold '>Instructor Dashboard</li>
                         <li><Link to="dashboard/add-a-class">Add A Class</Link></li>
-                        <li><a>My Classes</a></li>
+                        <li><Link to="dashboard/my-classes">My Classes</Link></li>
                         <li><a>Total Enrolled Students</a></li>
                         <li><a>Feedback</a></li>
                     </> : <>
