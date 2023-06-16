@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 const DashboardLayout = () => {
-    const {user, loading} = useContext(AuthContext)
+    const {user, loading, logOut} = useContext(AuthContext)
+    const {allClasses, setAllClasses} = useState([])
 
     const { data: loggeduser = [], refetch } = useQuery(['loggeduser'], async () => {
         const res = await fetch(`http://localhost:5000/users?email=${user?.email}`)
@@ -14,13 +16,17 @@ const DashboardLayout = () => {
     if(loading){
         <span className="loading loading-bars loading-lg"></span>
     }
-    
     console.log(loggeduser[0]?.role)
- 
-    // const admin = true;
-    // const instructor = false;
-    // const student = false;
 
+
+
+ 
+
+    const handleLogOut = () =>{
+        logOut()
+        .then(result=>{})
+        .catch(err=>{})
+    }
 
 
     return (
@@ -45,7 +51,7 @@ const DashboardLayout = () => {
                     {/* For Admin */}
                     {loggeduser[0]?.role === 'admin' ? <>
                         <li className='text-start ps-4 mb-4 font-bold '>Admin Dashboard</li>
-                        <li><Link >Manage Classes</Link></li>
+                        <li><Link to="dashboard/manage-classes">Manage Classes</Link></li>
                         <li><Link to="dashboard/users">Manage Users</Link></li>
                     </> : loggeduser[0]?.role === 'instructor' ? <>
                     <li className='text-start ps-4 mb-4 font-bold '>Instructor Dashboard</li>
@@ -66,7 +72,7 @@ const DashboardLayout = () => {
                     <li><Link to="/">Instructors</Link></li>
                     <li><Link to="/">Classes</Link></li>
 
-                    <button className='btn bottom-4 w-3/4 absolute bg-gray-300'>LogOut</button>
+                    <button onClick={handleLogOut} className='btn bottom-4 w-3/4 absolute bg-gray-300'>LogOut</button>
                 </ul>
 
             </div>

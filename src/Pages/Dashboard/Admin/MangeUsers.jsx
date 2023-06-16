@@ -81,9 +81,9 @@ const MangeUsers = () => {
                                 <td>{user.role}</td>
                                 <th>
                                     <div className='flex flex-col gap-2'>
-                                        <button onClick={() => { handleMakeAdmin(user) }} className="btn btn-ghost bg-slate-200 btn-xs">Make Admin</button>
+                                        <button onClick={() => { handleMakeAdmin(user) }} className="btn btn-ghost bg-slate-200 btn-xs" disabled={user?.role == 'admin' && true}>Make Admin</button>
 
-                                        <button onClick={() => { handleMakeInstructor(user) }} className="btn bg-slate-200 btn-ghost btn-xs">Make Instructor</button>
+                                        <button onClick={() => { handleMakeInstructor(user) }} className="btn bg-slate-200 btn-ghost btn-xs" disabled={user?.role == 'instructor' && true}>Make Instructor</button>
                                     </div>
                                 </th>
                             </tr>)
