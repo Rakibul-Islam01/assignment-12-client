@@ -28,6 +28,7 @@ import AddAClass from './Pages/Dashboard/AddAClass/AddAClass.jsx';
 import MyClasses from './Pages/Dashboard/MyClasses/MyClasses.jsx';
 import ManageClasses from './Pages/Dashboard/ManageClasses/ManageClasses.jsx';
 import Instructors from './Pages/Home/Instructors/Instructors.jsx';
+import Classes from './Pages/Home/Classes/Classes.jsx';
 
 const queryClient = new QueryClient()
 
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/instructors",
         element: <Instructors></Instructors>
+      },
+      {
+        path: "/classes",
+        element: <Classes></Classes>
       }
     ]
   },

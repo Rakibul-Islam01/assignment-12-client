@@ -23,6 +23,8 @@ const ManageClasses = () => {
         return res.json()
     })
 
+    
+
     const handleApprove =(allClass) =>{
         fetch(`http://localhost:5000/allclasses/${allClass?._id}`, {
             method: 'PATCH'
