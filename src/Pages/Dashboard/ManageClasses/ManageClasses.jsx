@@ -1,20 +1,41 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
 
 const ManageClasses = () => {
-    const [allClasses, setAllClasses] = useState([])
+    // const [allClasses, setAllClasses] = useState([])
 
-    let url = 'http://localhost:5000/allclasses'
+    // let url = 'http://localhost:5000/allclasses'
 
-    useEffect(() => {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setAllClasses(data)
-            })
-    }, [url])
+    // useEffect(() => {
+    //     fetch(url)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             setAllClasses(data)
+    //         })
+    // }, [url])
+
+    const { data: allClasses = [], refetch } = useQuery(['allclasses'], async () => {
+        const res = await fetch('http://localhost:5000/allclasses')
+        return res.json()
+    })
+
+    const handleApprove =(allClass) =>{
+        fetch(`http://localhost:5000/allclasses/${allClass?._id}`, {
+            method: 'PATCH'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            refetch()
+            if(data.modifiedCount){
+                toast('Class Approved successfull')
+            }
+        })
+    }
 
     return (
         <div>
@@ -62,7 +83,7 @@ const ManageClasses = () => {
                                     <button className="btn bg-slate-200 btn-ghost btn-xs">{allClass.status}</button>
                                 </th>
                                 <td className='flex flex-col gap-2'>
-                                    <button className='btn btn-sm w-full'>Approve</button>
+                                    <button onClick={()=>{handleApprove(allClass)}} className='btn btn-sm w-full'>Approve</button>
                                     <button className='btn btn-sm w-full'>Deny</button>
                                     <button className='btn btn-sm w-full'>Send Feedback</button>
                                 </td>
@@ -74,6 +95,7 @@ const ManageClasses = () => {
 
                 </table>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
