@@ -83,7 +83,7 @@ const ManageClasses = () => {
                                     <button className="btn bg-slate-200 btn-ghost btn-xs">{allClass.status}</button>
                                 </th>
                                 <td className='flex flex-col gap-2'>
-                                    <button onClick={()=>{handleApprove(allClass)}} className='btn btn-sm w-full'>Approve</button>
+                                    <button onClick={()=>{handleApprove(allClass)}} className='btn btn-sm w-full' disabled={allClass.status == 'approved' && true}>Approve</button>
                                     <button className='btn btn-sm w-full'>Deny</button>
                                     <button className='btn btn-sm w-full'>Send Feedback</button>
                                 </td>
