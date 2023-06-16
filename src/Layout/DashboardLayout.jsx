@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 const DashboardLayout = () => {
     const {user, loading, logOut} = useContext(AuthContext)
     const {allClasses, setAllClasses} = useState([])
+    const navigate = useNavigate()
 
     const { data: loggeduser = [], refetch } = useQuery(['loggeduser'], async () => {
         const res = await fetch(`http://localhost:5000/users?email=${user?.email}`)
@@ -24,7 +26,10 @@ const DashboardLayout = () => {
 
     const handleLogOut = () =>{
         logOut()
-        .then(result=>{})
+        .then(result=>{
+            navigate('/')
+            toast("LogOut Successfull")
+        })
         .catch(err=>{})
     }
 
@@ -51,6 +56,12 @@ const DashboardLayout = () => {
                     {/* For Admin */}
                     {loggeduser[0]?.role === 'admin' ? <>
                         <li className='text-start ps-4 mb-4 font-bold '>Admin Dashboard</li>
+                        <div className='text-center mb-2 ms-4'>
+                            <img className='w-20 h-20 rounded' src={loggeduser[0]?.image} alt="" />
+                        </div>
+                        <p className='capitalize mb-1 text-start ms-4'>{loggeduser[0]?.name}</p>
+                        <p className='lowercase mb-4 text-start ms-4'>{loggeduser[0]?.email}</p>
+                        <hr />
                         <li><Link to="dashboard/manage-classes">Manage Classes</Link></li>
                         <li><Link to="dashboard/users">Manage Users</Link></li>
                     </> : loggeduser[0]?.role === 'instructor' ? <>
@@ -69,13 +80,14 @@ const DashboardLayout = () => {
                     <div className="divider"></div>
 
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="/">Instructors</Link></li>
-                    <li><Link to="/">Classes</Link></li>
+                    <li><Link to="/instructors">Instructors</Link></li>
+                    <li><Link to="/classes">Classes</Link></li>
 
                     <button onClick={handleLogOut} className='btn bottom-4 w-3/4 absolute bg-gray-300'>LogOut</button>
                 </ul>
 
             </div>
+            <ToastContainer></ToastContainer>
         </div>
 
     );

@@ -29,6 +29,7 @@ import MyClasses from './Pages/Dashboard/MyClasses/MyClasses.jsx';
 import ManageClasses from './Pages/Dashboard/ManageClasses/ManageClasses.jsx';
 import Instructors from './Pages/Home/Instructors/Instructors.jsx';
 import Classes from './Pages/Home/Classes/Classes.jsx';
+import PrivateRoute from './routes/PrivateRoute/PrivateRoute.jsx';
 
 const queryClient = new QueryClient()
 
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
       {
         path: 'dashboard/users',

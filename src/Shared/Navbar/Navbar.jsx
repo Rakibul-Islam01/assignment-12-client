@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import './Navbar.css'
 
 const Navbar = () => {
 
@@ -28,18 +29,18 @@ const Navbar = () => {
                             <li><Link to="/classes">Classes</Link></li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost uppercase font-bold text-xl">DrawVerse</a>
+                    <a  className="btn btn-ghost uppercase font-bold text-xl draw-verse">DrawVerse</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/instructors">Instructors</Link></li>
                         <li><Link to="/classes">Classes</Link></li>
-                        
+
                     </ul>
                 </div>
                 <div className="navbar-end">
-                <Link className='md:mr-2' to="/dashboard">Dashboard</Link> 
+                <Link className='mr-2' to="/dashboard">Dashboard</Link> 
                     {
                         user ? <>
                             <button onClick={handleLogOut} className='btn btn-sm mr-2'>LogOut</button> <img className='h-12 w-12 rounded-full cursor-pointer' src={user.photoURL} alt="" height={60} width={60} title={user?.displayName} />
@@ -47,8 +48,6 @@ const Navbar = () => {
                             <Link to="/login">Login</Link>
                         </button>
                     }
-
-
                 </div>
             </div>
         </div>

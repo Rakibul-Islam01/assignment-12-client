@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Login.css'
 import { FaBeer, FaEye, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -9,6 +9,11 @@ import { saveUser } from '../../api/auth';
 
 const Login = () => {
     const { signIn, signInWithGoogle } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location)
+
+    const from = location?.state?.from?.pathname || '/'
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -24,6 +29,7 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 toast("Login Successfull")
+                navigate(from, {replace: true})
                 // saveUser(result.user)
             })
             .catch(err => {
