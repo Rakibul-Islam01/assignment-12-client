@@ -30,7 +30,7 @@ const Navbar = () => {
                             <li><Link to="/classes">Classes</Link></li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost uppercase font-bold text-xl draw-verse">DrawVerse</a>
+                    <Link to="/" className="btn btn-ghost uppercase font-bold text-xl draw-verse">DrawVerse</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

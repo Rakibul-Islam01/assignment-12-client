@@ -27,6 +27,7 @@ const DashboardLayout = () => {
     const handleLogOut = () =>{
         logOut()
         .then(result=>{
+            navigate('/')
             toast("LogOut Successfull")
         })
         .catch(err=>{})

@@ -3,20 +3,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const ManageClasses = () => {
-    // const [allClasses, setAllClasses] = useState([])
-
-    // let url = 'http://localhost:5000/allclasses'
-
-    // useEffect(() => {
-    //     fetch(url)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             setAllClasses(data)
-    //         })
-    // }, [url])
+   
 
     const { data: allClasses = [], refetch } = useQuery(['allclasses'], async () => {
         const res = await fetch('http://localhost:5000/allclasses')
@@ -39,8 +29,22 @@ const ManageClasses = () => {
         })
     }
 
+    const handleDeny =(allClass) =>{
+        fetch(`http://localhost:5000/allclasses/deny/${allClass?._id}`, {
+            method: 'PATCH'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            refetch()
+            if(data.modifiedCount){
+                toast('Class Denied successfull')
+            }
+        })
+    }
+
     return (
-        <div>
+        <div className='my-8'>
             <h2 className='text-2xl text-center font-bold mb-8'>All the classes posted by the Instructors</h2>
 
             <div className="overflow-x-auto w-full">
@@ -85,9 +89,11 @@ const ManageClasses = () => {
                                     <p className="btn bg-slate-200 btn-ghost btn-xs cursor-not-allowed">{allClass.status}</p>
                                 </th>
                                 <td className='flex flex-col gap-2'>
-                                    <button onClick={()=>{handleApprove(allClass)}} className='btn btn-sm w-full' disabled={allClass.status == 'approved' && true}>Approve</button>
-                                    <button className='btn btn-sm w-full'>Deny</button>
+                                    <button onClick={()=>{handleApprove(allClass)}} className='btn btn-sm w-full' disabled={allClass.status == 'approved' || allClass.status == 'denied' && true}>Approve</button>
+                                    <button onClick={()=>handleDeny(allClass)} className='btn btn-sm w-full' disabled={allClass.status == 'denied' && true}>Deny</button>
+                                    <Link to="/feedback">
                                     <button className='btn btn-sm w-full'>Send Feedback</button>
+                                    </Link>
                                 </td>
                             </tr>)
                         }

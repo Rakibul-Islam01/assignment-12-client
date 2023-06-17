@@ -30,6 +30,7 @@ import ManageClasses from './Pages/Dashboard/ManageClasses/ManageClasses.jsx';
 import Instructors from './Pages/Home/Instructors/Instructors.jsx';
 import Classes from './Pages/Home/Classes/Classes.jsx';
 import PrivateRoute from './routes/PrivateRoute/PrivateRoute.jsx';
+import Feedback from './Pages/Dashboard/Feedback/Feedback.jsx';
 
 const queryClient = new QueryClient()
 
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/classes",
         element: <Classes></Classes>
+      },
+      {
+        path: "/feedback",
+        element: <Feedback></Feedback>
       }
     ]
   },
@@ -80,7 +85,8 @@ const router = createBrowserRouter([
       {
         path: 'dashboard/manage-classes',
         element: <ManageClasses></ManageClasses>
-      }
+      },
+      
     ]
   }
 ]);

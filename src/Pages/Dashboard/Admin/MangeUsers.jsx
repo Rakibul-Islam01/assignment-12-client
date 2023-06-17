@@ -38,11 +38,10 @@ const MangeUsers = () => {
             })
     }
 
-    // TODO: should button disabled after updating role by admin 
 
     return (
 
-        <div className='w-full'>
+        <div className='w-full my-8'>
             <h2 className='font-bold text-xl mb-10'>The Total Number Of Users: {users.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table text-center">

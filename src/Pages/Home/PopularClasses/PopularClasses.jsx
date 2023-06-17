@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const PopularClasses = () => {
+    const {user} = useContext(AuthContext)
 
     const { data: classes = [], refetch } = useQuery(['classes'], async () => {
         const res = await fetch('http://localhost:5000/classes?status=approved')
         return res.json();
     })
+
 
     return (
         <div className='my-12 font-bold uppercase'>
@@ -24,7 +27,7 @@ const PopularClasses = () => {
                   <p className='font-normal'> <span>Available Seats: </span>{singleClass.availableSeats}</p>
                   <p> <span>Price: </span> ${singleClass.price}</p>
                   <div className="card-actions w-full text-center mx-auto">
-                    <button className="btn w-full bg-[#00cecb] hover:bg-[#13b8b5]">Select</button>
+                    <button onClick={()=>selectClass()} className="btn w-full bg-[#00cecb] hover:bg-[#13b8b5]">Select</button>
                   </div>
                 </div>
               </div>)
