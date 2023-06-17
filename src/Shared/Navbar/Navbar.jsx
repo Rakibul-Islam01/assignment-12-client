@@ -5,13 +5,14 @@ import './Navbar.css'
 
 const Navbar = () => {
 
+
     const { user, logOut } = useContext(AuthContext)
     console.log(user)
 
-    const handleLogOut =()=>{
+    const handleLogOut = () => {
         logOut()
-        .then(result=>{})
-        .catch(err=>{})
+            .then(result => { })
+            .catch(err => { })
     }
 
 
@@ -29,7 +30,7 @@ const Navbar = () => {
                             <li><Link to="/classes">Classes</Link></li>
                         </ul>
                     </div>
-                    <a  className="btn btn-ghost uppercase font-bold text-xl draw-verse">DrawVerse</a>
+                    <a className="btn btn-ghost uppercase font-bold text-xl draw-verse">DrawVerse</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -40,7 +41,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                <Link className='mr-2' to="/dashboard">Dashboard</Link> 
+                    <Link className='mr-2' to="/dashboard">Dashboard</Link>
                     {
                         user ? <>
                             <button onClick={handleLogOut} className='btn btn-sm mr-2'>LogOut</button> <img className='h-12 w-12 rounded-full cursor-pointer' src={user.photoURL} alt="" height={60} width={60} title={user?.displayName} />
