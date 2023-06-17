@@ -26,7 +26,7 @@ const AddAClass = () => {
 
         const addClass = { className, photoUrl, userName, userEmail, availableSeats, price, status }
 
-        fetch('http://localhost:5000/allclasses', {
+        fetch('https://assignment-12-server-ecru.vercel.app/allclasses', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

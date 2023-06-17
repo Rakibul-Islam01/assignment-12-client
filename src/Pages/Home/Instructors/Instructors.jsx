@@ -8,7 +8,7 @@ const Instructors = () => {
     // console.log(user)
 
     const { data: instructors = [], refetch } = useQuery(['instructors'], async () => {
-        const res = await fetch(`http://localhost:5000/instructor?role=instructor`)
+        const res = await fetch(`https://assignment-12-server-ecru.vercel.app/instructor?role=instructor`)
         return res.json()
     })
 

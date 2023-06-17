@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const Classes = () => {
     const { data: classes = [], refetch } = useQuery(['classes'], async () => {
-        const res = await fetch('http://localhost:5000/classes?status=approved')
+        const res = await fetch('https://assignment-12-server-ecru.vercel.app/classes?status=approved')
         return res.json();
     })
 

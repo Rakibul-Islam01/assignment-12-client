@@ -9,14 +9,14 @@ const ManageClasses = () => {
    
 
     const { data: allClasses = [], refetch } = useQuery(['allclasses'], async () => {
-        const res = await fetch('http://localhost:5000/allclasses')
+        const res = await fetch('https://assignment-12-server-ecru.vercel.app/allclasses')
         return res.json()
     })
 
     
 
     const handleApprove =(allClass) =>{
-        fetch(`http://localhost:5000/allclasses/${allClass?._id}`, {
+        fetch(`https://assignment-12-server-ecru.vercel.app/allclasses/${allClass?._id}`, {
             method: 'PATCH'
         })
         .then(res => res.json())
@@ -30,7 +30,7 @@ const ManageClasses = () => {
     }
 
     const handleDeny =(allClass) =>{
-        fetch(`http://localhost:5000/allclasses/deny/${allClass?._id}`, {
+        fetch(`https://assignment-12-server-ecru.vercel.app/allclasses/deny/${allClass?._id}`, {
             method: 'PATCH'
         })
         .then(res => res.json())

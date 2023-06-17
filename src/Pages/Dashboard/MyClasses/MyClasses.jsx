@@ -13,7 +13,7 @@ const MyClasses = () => {
     const { user } = useContext(AuthContext)
     const [myClasses, setMyClasses] = useState([])
 
-    let url = `http://localhost:5000/myclasses?userEmail=${user?.email}`
+    let url = `https://assignment-12-server-ecru.vercel.app/myclasses?userEmail=${user?.email}`
 
     useEffect(() => {
         fetch(url)
