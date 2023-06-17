@@ -8,7 +8,7 @@ const Classes = () => {
     })
 
 
-    console.log(classes)
+    // console.log(classes)
 
 
 

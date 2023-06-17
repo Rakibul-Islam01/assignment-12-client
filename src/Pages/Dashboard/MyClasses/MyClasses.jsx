@@ -68,7 +68,7 @@ const MyClasses = () => {
                                 <td className='text-center'>{myClass?.availableSeats}</td>
                                 <td className='text-center'>${myClass?.price}</td>
                                 <th>
-                                    <button className="btn bg-slate-200 btn-ghost btn-xs">{myClass.status}</button>
+                                    <p >{myClass.status}</p>
                                 </th>
                                 <td></td>
                                 <td></td>
