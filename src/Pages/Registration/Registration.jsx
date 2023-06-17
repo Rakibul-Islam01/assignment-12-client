@@ -35,7 +35,7 @@ const Registration = () => {
 
         const handleUpdateUser = (user, name, photoUrl) => {
             updateProfile(user, {
-                displayName: name, photoURL: photoUrl
+                displayName: data.name, photoURL: data.photoUrl
             })
                 .then(() => {
                     console.log('user name and photo updated')
