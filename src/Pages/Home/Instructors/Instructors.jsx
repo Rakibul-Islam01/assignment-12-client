@@ -14,7 +14,7 @@ const Instructors = () => {
 
     return (
         <div className='my-12'>
-            <h2 className='text-center text-3xl font-semibold mb-7'>Total Number Instructors: {instructors.length}</h2>
+            <h2 className='text-center text-3xl mb-7'>Total Number Of Instructors: {instructors.length}</h2>
 
             <div className="overflow-x-auto">
                 <table className="table text-center">

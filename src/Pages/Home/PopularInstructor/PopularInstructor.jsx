@@ -13,15 +13,15 @@ const PopularInstructor = () => {
 
 
     return (
-        <div className='my-12'>
+        <div className='my-14 mt-20'>
             <h2 className='font-bold text-2xl uppercase'>Our Popular Instructors</h2>
             <hr className='w-3/12 mx-auto mt-2 mb-8' />
 
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            <div className='grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  mx-auto'>
                 {
                     
-                    classes.slice(0, 6).map((instructor, index) => <div key={index} className="card w-96 bg-base-100 shadow-xl image-full">
-                        <figure><img height={200} style={{height: '100%'}} src={instructor.photoUrl} alt="Shoes" /></figure>
+                    classes.slice(0, 6).map((instructor, index) => <div key={index} className="card w-full bg-base-100 shadow-xl image-full">
+                        <figure><img src={instructor.photoUrl} alt="Shoes" /></figure>
                         <div className="card-body text-white opacity-100 flex flex-col items-center justify-center">
                             <h2 className="card-title text-center mx-auto">Instructor: {instructor.userName}</h2>
                             <h2>Email: {instructor.userEmail}</h2>
